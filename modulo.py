@@ -1,14 +1,16 @@
 import json
 from time import sleep
-
 import requests
 
+
 URL_ALL = 'https://economia.awesomeapi.com.br/all'
+
 class ApiCotacao:
           def __init__(self, url):
               self.url_all = url
               
           def parsing(self, moeda):
+              """ retorna um json para ser tratado """
               try:
                   url = self.url_all
                   resposta = requests.get(f'{url}/{moeda}')
@@ -21,7 +23,7 @@ class ApiCotacao:
                   print('erro')    
 
           def mostrar_moeda(self, moeda):
-
+              """Exibe a cotação da moeda desejada"""
              try:
                  dictionary = ApiCotacao.parsing(self, moeda)
                  if dictionary:
@@ -37,6 +39,6 @@ class ApiCotacao:
                      print(f'## MOEDA: {code} - {codein} / {name}  ##')
                      print(f'## BID: {bid} # ASK: {ask} ##')
                      print(f'## HIGH: {high} # LOW: {low} ##')
-                     print(f'## varBid: {varbid}   ##') #-0.02
+                     print(f'## varBid: {varbid}   ##')
              except Exception as e:
                 print(e)
